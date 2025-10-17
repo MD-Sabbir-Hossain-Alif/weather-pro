@@ -35,7 +35,7 @@ It provides **real-time weather data**, **24-hour hourly forecasts**, and **7-da
 WeatherPro/
 │
 ├── index.html # Main HTML file
-├── src/ # Source files
+├── source/ # Source files
 │ ├── style.css # Custom styles (glass effect, dark mode)
 │ ├── weather-app.js # Core app logic (API, UI updates, notifications)
 │ ├── cf-protection-loader.js # Cloudflare script (auto-generated)
@@ -103,7 +103,7 @@ This project is license free. Free to use, modify, and distribute.
 
 ## 💡 Author
 
-**SabbirOfficial**  
+**SabbirOfficial.Dev**  
 Made with ❤️ using Tailwind CSS + OpenWeatherMap API.
 
 ---
@@ -111,4 +111,5 @@ Made with ❤️ using Tailwind CSS + OpenWeatherMap API.
 ### 🌐 Live Demo
 
 > [Netlify](https://spectacular-speculoos-d73345.netlify.app/)
+
 > [Github Pages](https://md-sabbir-hossain-alif.github.io/weather-pro/)
