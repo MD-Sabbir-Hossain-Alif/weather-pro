@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="md-sabbir-hossain-alif">
+    <meta name="website" content="sabbirofficial.dev">
+    <title>WeatherPro | Weather App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="source/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="source/favicon-logo.png">
+</head>
+<body class="min-h-full dark-bg font-sans">
+    <!-- Navigation Bar -->
+    <nav class="glass-effect p-4 mb-6 relative z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <img src="source/favicon-logo.png" alt="logo for weather app" class="h-9 w-9">
+                    <h1 class="text-2xl font-bold text-white cursor-pointer">WeatherPro</h1>
+                </a>
+            </div>
+    
+            <!-- Hamburger Button (Mobile) -->
+            <button id="menuBtn" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+    
+            <!-- Nav Links -->
+            <div id="navLinks" class="hidden md:flex flex-col md:flex-row absolute md:static top-16 left-0 w-full md:w-auto
+                    bg-black md:bg-transparent bg-opacity-90 md:bg-opacity-0 space-y-4 md:space-y-0 md:space-x-6 
+                    p-4 md:p-0 rounded-b-2xl md:rounded-none z-50 transition-all duration-300">
+                <a href="#weather" class="text-white hover:text-blue-200 transition-colors flex items-center space-x-2">
+                    <i class="fas fa-thermometer-half"></i><span>Weather</span>
+                </a>
+                <a href="#details" class="text-white hover:text-blue-200 transition-colors flex items-center space-x-2">
+                    <i class="fas fa-info-circle"></i><span>Details</span>
+                </a>
+                <a href="#hourly" class="text-white hover:text-blue-200 transition-colors flex items-center space-x-2">
+                    <i class="fas fa-clock"></i><span>24-Hour Forecast</span>
+                </a>
+                <a href="#weekly" class="text-white hover:text-blue-200 transition-colors flex items-center space-x-2">
+                    <i class="fas fa-calendar-week"></i><span>7-Day Forecast</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="max-w-7xl mx-auto px-4 pb-8">
+        <!-- Search Bar -->
+        <div class="mb-8">
+            <div class="glass-effect rounded-2xl p-6">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-1 relative">
+                        <input type="text" id="citySearch" placeholder="Search for a city..."
+                            class="w-full bg-white bg-opacity-20 text-white placeholder-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                            onkeypress="handleSearch(event)">
+                        <i class="fas fa-search absolute right-3 top-3 text-white opacity-70"></i>
+                    </div>
+                    <button onclick="searchWeather()"
+                        class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-xl transition-all font-medium">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Weather Section -->
+        <div id="weather" class="grid lg:grid-cols-3 gap-6 mb-8">
+            <!-- Main Weather Card -->
+            <div class="lg:col-span-2 glass-effect rounded-2xl p-8 weather-card">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 id="currentCity" class="text-3xl font-bold text-white mb-2">Dhaka, Bangladesh</h2>
+                        <p id="currentDate" class="text-blue-100 text-lg">Friday, December 13, 2024</p>
+                    </div>
+                    <div class="text-right">
+                        <div id="currentTemp" class="text-6xl font-light text-white">28°C</div>
+                        <p id="weatherDesc" class="text-blue-100 text-lg">Partly Cloudy</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center mb-6">
+                    <div id="weatherIcon" class="text-8xl">⛅</div>
+                </div>
+            </div>
+
+            <!-- Weather Details -->
+            <div id="details" class="glass-effect rounded-2xl p-6 weather-card">
+                <h3 class="text-xl font-semibold text-white mb-6">Weather Details</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-100 flex items-center"><i class="fas fa-thermometer-half mr-2"></i>Feels
+                            like</span>
+                        <span id="feelsLike" class="text-white font-medium">32°C</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-100 flex items-center"><i class="fas fa-tint mr-2"></i>Humidity</span>
+                        <span id="humidity" class="text-white font-medium">65%</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-100 flex items-center"><i class="fas fa-wind mr-2"></i>Wind Speed</span>
+                        <span id="windSpeed" class="text-white font-medium">12 km/h</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-100 flex items-center"><i
+                                class="fas fa-cloud-rain mr-2"></i>Precipitation</span>
+                        <span id="precipitation" class="text-white font-medium">20%</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-100 flex items-center"><i class="fas fa-eye mr-2"></i>Visibility</span>
+                        <span id="visibility" class="text-white font-medium">10 km</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-100 flex items-center"><i
+                                class="fas fa-tachometer-alt mr-2"></i>Pressure</span>
+                        <span id="pressure" class="text-white font-medium">1013 hPa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hourly Forecast -->
+        <div id="hourly" class="glass-effect rounded-2xl p-6 mb-8 weather-card">
+            <h3 class="text-xl font-semibold text-white mb-6">24-Hour Forecast</h3>
+            <div class="flex space-x-4 overflow-x-auto pb-4" id="hourlyForecast">
+                <!-- Hourly items will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- 7-Day Forecast -->
+        <div id="weekly" class="glass-effect rounded-2xl p-6 weather-card">
+            <h3 class="text-xl font-semibold text-white mb-6">7-Day Forecast</h3>
+            <div class="grid gap-4" id="weeklyForecast">
+                <!-- Weekly items will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="source/weather-app.js"></script>
+    <script src="source/cf-protection-loader.js"></script>
+
+</body>
+</html>
